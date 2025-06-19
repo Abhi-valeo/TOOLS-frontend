@@ -407,10 +407,11 @@ const HakeemChat = () => {
                 </svg>
               </button>
               <div>
-                <h1 className="text-2xl font-roboto font-bold text-gray-800 text-shadow">
+                <h1 className="text-2xl font-roboto font-bold text-gray-800 text-shadow hover:text-blue-600 transition-all duration-300 hover:scale-105 cursor-pointer group">
                   {bot === 'CS_BOT' ? 'Mustashar' : bot === 'KAREEM' ? 'Kareem' : 'Hakeem AI'}
+                  <div className="w-0 group-hover:w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 mt-1"></div>
                 </h1>
-                <p className="text-sm font-opensans font-medium text-gray-600 text-shadow">
+                <p className="text-sm font-opensans font-medium text-gray-600 text-shadow group-hover:text-gray-700 transition-colors duration-300">
                   Your AI Health Assistant
                 </p>
               </div>
