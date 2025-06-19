@@ -56,18 +56,14 @@ const HakeemChat = () => {
       } else if (bot === 'KAREEM') {
         apiUrl = `http://ec2-34-227-108-46.compute-1.amazonaws.com:9090/api/chat/kareem_session?prompt=${encodeURIComponent(message)}&email=${encodeURIComponent(email)}&name=${encodeURIComponent(kareemName)}&city=${encodeURIComponent(kareemCity)}&country=${encodeURIComponent(kareemCountry)}`;
       } else {
-        apiUrl = `http://ec2-34-227-108-46.compute-1.amazonaws.com:9090/chat`;
+        apiUrl = `http://ec2-34-227-108-46.compute-1.amazonaws.com:9090/chat?prompt=${encodeURIComponent(message)}&email=${encodeURIComponent(email)}`;
       }
 
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          prompt: message,
-          email: email || 'user@example.com'
-        })
+        }
       });
 
       if (response.ok) {

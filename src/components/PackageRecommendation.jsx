@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useBiomarker } from '../context/BiomarkerContext';
-import { currentConfig } from '../config';
+import config from '../config/environment';
 
 const PackageRecommendation = () => {
   const { selected, packages, allBiomarkers, selectedCurrency } = useBiomarker();
@@ -23,7 +23,7 @@ const PackageRecommendation = () => {
     }
     setBmDetailLoading(true);
     try {
-      const res = await fetch(`${currentConfig.apiBaseUrl}/api/catalog/recommendation/getBiomarker?bmUuid=${uuid}`);
+      const res = await fetch(`${config.CATALOG_API_URL}/api/catalog/recommendation/getBiomarker?bmUuid=${uuid}`);
       const data = await res.json();
       if (data && data.length > 0) {
         setBmDetailCache(prev => ({ ...prev, [uuid]: data[0] }));
