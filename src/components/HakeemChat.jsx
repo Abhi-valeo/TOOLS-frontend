@@ -192,41 +192,37 @@ const HakeemChat = () => {
         <div className="max-w-4xl mx-auto animate-fade-in content-wrapper">
           <div className="glass-effect rounded-3xl p-8 md:p-12 animate-slide-up">
             <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-playfair font-normal text-amber-50 mb-4 tracking-wider text-border">
-                Valeo Wellbeing
+              <h1 className="text-3xl md:text-5xl font-playfair font-bold bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent mb-4 tracking-wider animate-pulse hover:animate-none transition-all duration-500 hover:scale-105 cursor-default">
+                Valeos AI Initiatives
               </h1>
-              <h2 className="text-2xl md:text-3xl font-roboto font-bold text-gray-800 mb-4 text-shadow">
-                WELCOME TO VALEO CHATBOT
-              </h2>
-              <p className="text-lg font-opensans font-medium text-gray-600 text-shadow">
-                Your AI-powered health companion
-              </p>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full animate-pulse"></div>
             </div>
             
             <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto space-y-6">
-              <div className="relative">
+              <div className="relative group">
                 <input
                   type="email"
                   placeholder="Enter your email to start"
                   value={emailInput}
                   onChange={e => setEmailInput(e.target.value)}
                   required
-                  className="w-full p-4 bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-2xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300/50 focus:border-blue-300 transition-all duration-300 text-lg font-opensans"
+                  className="w-full p-4 bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-2xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300/50 focus:border-blue-300 transition-all duration-300 text-lg font-opensans group-hover:border-blue-400/50 group-hover:bg-white/30"
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-4">
-                  <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 text-gray-500 group-hover:text-blue-500 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
                   </svg>
                 </div>
               </div>
               <button 
                 type="submit" 
-                className="w-full py-4 px-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-roboto font-bold rounded-2xl text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                className="w-full py-4 px-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-roboto font-bold rounded-2xl text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group"
               >
-                Start Chat
+                <span className="relative z-10">Start Chat</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
               {error && (
-                <div className="bg-red-100/50 backdrop-blur-sm rounded-xl p-4 border border-red-200/50">
+                <div className="bg-red-100/50 backdrop-blur-sm rounded-xl p-4 border border-red-200/50 animate-bounce">
                   <p className="text-red-700 text-center font-opensans">{error}</p>
                 </div>
               )}
@@ -244,54 +240,57 @@ const HakeemChat = () => {
         <div className="max-w-6xl mx-auto animate-fade-in content-wrapper">
           <div className="glass-effect rounded-3xl p-8 md:p-12 animate-slide-up">
             <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-playfair font-normal text-amber-50 mb-4 tracking-wider text-border">
-                Valeo Wellbeing
+              <h1 className="text-3xl md:text-5xl font-playfair font-bold bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-4 tracking-wider animate-pulse hover:animate-none transition-all duration-500 hover:scale-105 cursor-default">
+                Let the Bots Do the Boring Stuff!
               </h1>
-              <h2 className="text-3xl md:text-4xl font-roboto font-bold text-gray-800 mb-4 text-shadow">
-                Select Your AI Assistant
-              </h2>
-              <p className="text-lg font-opensans font-medium text-gray-600 text-shadow">
-                Choose the perfect companion for your health journey
-              </p>
+              <div className="w-32 h-1 bg-gradient-to-r from-green-500 to-blue-600 mx-auto rounded-full animate-pulse"></div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               <div className="group">
                 <button
-                  className="w-full h-80 glass-effect rounded-2xl p-8 flex flex-col items-center justify-center border border-white/30 hover:border-yellow-300/50 hover:bg-yellow-100/30 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl"
+                  className="w-full h-80 glass-effect rounded-2xl p-8 flex flex-col items-center justify-center border border-white/30 hover:border-yellow-300/50 hover:bg-yellow-100/30 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl relative overflow-hidden"
                   onClick={() => handleBotSelect('HEALTHBOT')}
                 >
-                  <div className="w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl">
-                    <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl group-hover:shadow-2xl">
+                    <svg className="w-12 h-12 text-white group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-roboto font-bold text-gray-800 mb-4 drop-shadow-lg">Hakeem</h3>
-                  <p className="text-base font-opensans text-gray-600 text-center leading-relaxed mb-6">
+                  <h3 className="text-2xl font-roboto font-bold text-gray-800 mb-4 drop-shadow-lg group-hover:text-green-700 transition-colors duration-300">Hakeem</h3>
+                  <p className="text-base font-opensans text-gray-600 text-center leading-relaxed mb-6 group-hover:text-gray-700 transition-colors duration-300">
                     Your comprehensive AI health assistant with advanced medical insights and personalized wellness guidance
                   </p>
-                  <div className="text-yellow-600 text-lg font-roboto font-semibold group-hover:text-yellow-700 transition-colors duration-300">
-                    Start Health Journey →
+                  <div className="text-yellow-600 text-lg font-roboto font-semibold group-hover:text-yellow-700 transition-colors duration-300 flex items-center gap-2">
+                    Start Health Journey 
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
                   </div>
                 </button>
               </div>
 
               <div className="group">
                 <button
-                  className="w-full h-80 glass-effect rounded-2xl p-8 flex flex-col items-center justify-center border border-white/30 hover:border-blue-300/50 hover:bg-blue-100/30 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl"
+                  className="w-full h-80 glass-effect rounded-2xl p-8 flex flex-col items-center justify-center border border-white/30 hover:border-blue-300/50 hover:bg-blue-100/30 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl relative overflow-hidden"
                   onClick={() => setShowKareemForm(true)}
                 >
-                  <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl">
-                    <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl group-hover:shadow-2xl">
+                    <svg className="w-12 h-12 text-white group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-roboto font-bold text-gray-800 mb-4 drop-shadow-lg">Testing</h3>
-                  <p className="text-base font-opensans text-gray-600 text-center leading-relaxed mb-6">
+                  <h3 className="text-2xl font-roboto font-bold text-gray-800 mb-4 drop-shadow-lg group-hover:text-blue-700 transition-colors duration-300">Testing</h3>
+                  <p className="text-base font-opensans text-gray-600 text-center leading-relaxed mb-6 group-hover:text-gray-700 transition-colors duration-300">
                     Personalized session-based conversations with contextual awareness and location-specific insights
                   </p>
-                  <div className="text-blue-600 text-lg font-roboto font-semibold group-hover:text-blue-700 transition-colors duration-300">
-                    Begin Testing Session →
+                  <div className="text-blue-600 text-lg font-roboto font-semibold group-hover:text-blue-700 transition-colors duration-300 flex items-center gap-2">
+                    Begin Testing Session 
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
                   </div>
                 </button>
               </div>

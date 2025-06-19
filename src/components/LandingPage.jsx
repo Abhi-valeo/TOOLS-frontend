@@ -16,9 +16,10 @@ const LandingPage = () => {
     <div className="max-w-4xl mx-auto text-center animate-fade-in content-wrapper">
       {/* Header */}
       <div className="mb-12 animate-slide-up">
-        <h1 className="text-5xl md:text-7xl font-playfair font-normal text-amber-50 mb-4 tracking-wider text-border cursor-pointer select-none">
+        <h1 className="text-3xl md:text-5xl font-playfair font-bold bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent mb-4 tracking-wider animate-pulse hover:animate-none transition-all duration-500 hover:scale-105 cursor-default">
           Valeo Tools
         </h1>
+        <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-500 mx-auto rounded-full animate-pulse mb-6"></div>
         <p className="text-xl md:text-2xl font-opensans font-medium text-gray-800 max-w-2xl mx-auto text-shadow">
           Advanced healthcare analytics and personalized recommendations
         </p>
