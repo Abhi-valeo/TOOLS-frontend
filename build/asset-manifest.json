@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/biomarker/static/css/main.8f40b21f.css",
+    "main.js": "/biomarker/static/js/main.effbc964.js",
+    "static/js/453.5ba9be9e.chunk.js": "/biomarker/static/js/453.5ba9be9e.chunk.js",
+    "index.html": "/biomarker/index.html",
+    "main.8f40b21f.css.map": "/biomarker/static/css/main.8f40b21f.css.map",
+    "main.effbc964.js.map": "/biomarker/static/js/main.effbc964.js.map",
+    "453.5ba9be9e.chunk.js.map": "/biomarker/static/js/453.5ba9be9e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8f40b21f.css",
+    "static/js/main.effbc964.js"
+  ]
+}
