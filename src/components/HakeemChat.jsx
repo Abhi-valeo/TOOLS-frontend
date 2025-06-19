@@ -392,71 +392,71 @@ const HakeemChat = () => {
 
   // Chat interface
   return (
-    <div className="min-h-screen p-4 font-opensans">
-      <div className="max-w-6xl mx-auto animate-fade-in content-wrapper">
-        <div className="glass-effect rounded-3xl p-8 md:p-12 animate-slide-up">
+    <div className="min-h-screen p-2 font-opensans">
+      <div className="w-full mx-auto animate-fade-in content-wrapper">
+        <div className="glass-effect rounded-3xl p-4 md:p-6 animate-slide-up">
           {/* Header */}
-          <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/30">
-            <div className="flex items-center gap-6">
+          <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/30">
+            <div className="flex items-center gap-4">
               <button 
                 onClick={() => navigate('/')}
-                className="p-3 glass-effect rounded-2xl hover:bg-white/30 transition-all duration-300 text-gray-600 hover:text-gray-800 hover:scale-110"
+                className="p-2 glass-effect rounded-2xl hover:bg-white/30 transition-all duration-300 text-gray-600 hover:text-gray-800 hover:scale-110"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
               </button>
               <div>
-                <h1 className="text-3xl font-roboto font-bold text-gray-800 text-shadow">
+                <h1 className="text-2xl font-roboto font-bold text-gray-800 text-shadow">
                   {bot === 'CS_BOT' ? 'Mustashar' : bot === 'KAREEM' ? 'Kareem' : 'Hakeem AI'}
                 </h1>
-                <p className="text-base font-opensans font-medium text-gray-600 text-shadow">
+                <p className="text-sm font-opensans font-medium text-gray-600 text-shadow">
                   Your AI Health Assistant
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="glass-effect rounded-2xl px-4 py-3 border border-white/30">
-                <p className="text-gray-800 font-roboto font-semibold">{email}</p>
+            <div className="flex items-center gap-3">
+              <div className="glass-effect rounded-2xl px-3 py-2 border border-white/30">
+                <p className="text-gray-800 font-roboto font-semibold text-sm">{email}</p>
               </div>
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             </div>
           </div>
 
           {/* Chat Container */}
-          <div className="glass-effect rounded-2xl border border-white/20 h-[calc(100vh-300px)] flex flex-col">
+          <div className="glass-effect rounded-2xl border border-white/20 h-[calc(100vh-200px)] flex flex-col">
             {/* Chat History */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {chatHistory.length === 0 ? (
-                <div className="text-center text-gray-600 mt-16">
-                  <div className="w-24 h-24 glass-effect rounded-full flex items-center justify-center mx-auto mb-6">
-                    <svg className="w-12 h-12 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="text-center text-gray-600 mt-12">
+                  <div className="w-20 h-20 glass-effect rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                     </svg>
                   </div>
-                  <h2 className="text-2xl font-roboto font-bold text-gray-800 mb-4 text-shadow">
+                  <h2 className="text-xl font-roboto font-bold text-gray-800 mb-3 text-shadow">
                     Welcome to {bot === 'CS_BOT' ? 'Mustashar' : bot === 'KAREEM' ? 'Kareem' : 'Hakeem'}!
                   </h2>
-                  <p className="text-base font-opensans text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                  <p className="text-sm font-opensans text-gray-600 max-w-2xl mx-auto leading-relaxed">
                     I'm your AI health assistant, ready to help with your wellness journey. Ask me anything about health, nutrition, fitness, or medical advice.
                   </p>
                 </div>
               ) : (
                 chatHistory.map((chat, index) => (
                   <div key={index} className={`flex ${chat.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-2xl p-4 rounded-2xl shadow-lg ${
+                    <div className={`max-w-5xl p-3 rounded-2xl shadow-lg ${
                       chat.type === 'user' 
                         ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white' 
                         : 'glass-effect text-gray-800 border border-white/30'
                     }`}>
-                      <div className="text-base font-opensans leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                      <div className="text-sm font-opensans leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
                         {chat.type === 'bot' ? (
                           <span dangerouslySetInnerHTML={{ __html: linkify(chat.text) }} />
                         ) : (
                           chat.text
                         )}
                       </div>
-                      <div className={`text-xs mt-2 ${chat.type === 'user' ? 'text-blue-100' : 'text-gray-500'}`}>
+                      <div className={`text-xs mt-1 ${chat.type === 'user' ? 'text-blue-100' : 'text-gray-500'}`}>
                         {chat.timestamp.toLocaleTimeString()}
                       </div>
                     </div>
@@ -466,11 +466,11 @@ const HakeemChat = () => {
               
               {isStreaming && (
                 <div className="flex justify-start">
-                  <div className="max-w-2xl p-4 rounded-2xl glass-effect text-gray-800 border border-white/30 shadow-lg">
-                    <div className="text-base font-opensans leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                  <div className="max-w-5xl p-3 rounded-2xl glass-effect text-gray-800 border border-white/30 shadow-lg">
+                    <div className="text-sm font-opensans leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
                       <span dangerouslySetInnerHTML={{ __html: linkify(streamingResponse) }} />
                     </div>
-                    <div className="text-xs mt-2 text-gray-500">
+                    <div className="text-xs mt-1 text-gray-500">
                       {getCurrentTime()}
                     </div>
                   </div>
@@ -479,9 +479,9 @@ const HakeemChat = () => {
               
               {loading && !isStreaming && (
                 <div className="flex justify-start">
-                  <div className="max-w-2xl p-4 rounded-2xl glass-effect text-gray-800 border border-white/30 shadow-lg">
-                    <div className="flex items-center gap-3 text-base">
-                      <div className="w-6 h-6 border-2 border-blue-500/30 border-t-blue-500 rounded-full animate-spin"></div>
+                  <div className="max-w-5xl p-3 rounded-2xl glass-effect text-gray-800 border border-white/30 shadow-lg">
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="w-5 h-5 border-2 border-blue-500/30 border-t-blue-500 rounded-full animate-spin"></div>
                       <span className="font-opensans">Thinking...</span>
                     </div>
                   </div>
@@ -490,8 +490,8 @@ const HakeemChat = () => {
             </div>
 
             {/* Chat Input */}
-            <div className="p-6 border-t border-white/30">
-              <form onSubmit={bot === 'STREAMING' ? handleStreamingResponse : handleSendMessage} className="flex gap-4">
+            <div className="p-4 border-t border-white/30">
+              <form onSubmit={bot === 'STREAMING' ? handleStreamingResponse : handleSendMessage} className="flex gap-3">
                 <div className="flex-1 relative">
                   <input
                     type="text"
@@ -500,10 +500,10 @@ const HakeemChat = () => {
                     onChange={(e) => setMessage(e.target.value)}
                     disabled={loading}
                     required
-                    className="w-full p-4 bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-2xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300/50 focus:border-blue-300 transition-all duration-300 text-base font-opensans"
+                    className="w-full p-3 bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-2xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300/50 focus:border-blue-300 transition-all duration-300 text-sm font-opensans"
                   />
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-4">
-                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                    <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                     </svg>
                   </div>
@@ -511,15 +511,15 @@ const HakeemChat = () => {
                 <button
                   type="submit"
                   disabled={loading || !message.trim()}
-                  className="px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-roboto font-bold rounded-2xl text-base shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none transition-all duration-300"
+                  className="px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-roboto font-bold rounded-2xl text-sm shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none transition-all duration-300"
                 >
                   Send
                 </button>
               </form>
               
               {error && (
-                <div className="mt-4 bg-red-100/50 backdrop-blur-sm rounded-xl p-4 border border-red-200/50">
-                  <p className="text-red-700 text-center font-opensans">{error}</p>
+                <div className="mt-3 bg-red-100/50 backdrop-blur-sm rounded-xl p-3 border border-red-200/50">
+                  <p className="text-red-700 text-center font-opensans text-sm">{error}</p>
                 </div>
               )}
             </div>
