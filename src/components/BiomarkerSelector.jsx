@@ -4,7 +4,6 @@ import { useBiomarker } from '../context/BiomarkerContext';
 import { currentConfig } from '../config';
 
 const BiomarkerSelector = () => {
-  const [allOptions, setAllOptions] = useState([]);
   const [selected, setSelected] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
@@ -13,22 +12,6 @@ const BiomarkerSelector = () => {
   const [infoBiomarker, setInfoBiomarker] = useState(null);
   const navigate = useNavigate();
   const { biomarkerGroups, selectedCity, fetchPackages } = useBiomarker();
-
-  useEffect(() => {
-    // Convert biomarkerGroups to flat array of options
-    if (biomarkerGroups && Object.keys(biomarkerGroups).length > 0) {
-      const options = [];
-      Object.values(biomarkerGroups).forEach(group => {
-        if (group && group.options) {
-          options.push(...group.options);
-        }
-        if (Array.isArray(group)) {
-          options.push(...group);
-        }
-      });
-      setAllOptions(options);
-    }
-  }, [biomarkerGroups]);
 
   const toggle = (uuid) => {
     setSelected(prev => 
@@ -55,38 +38,32 @@ const BiomarkerSelector = () => {
     }
   };
 
-  // Group biomarkers by their group
-  const biomarkerGroupsDisplay = allOptions.reduce((groups, option) => {
-    const groupName = option.group || 'Other';
-    if (!groups[groupName]) {
-      groups[groupName] = [];
-    }
-    groups[groupName].push(option);
-    return groups;
-  }, {});
-
-  // Filter groups based on search
-  const filteredGroups = Object.entries(biomarkerGroupsDisplay)
-    .filter(([groupName, options]) => 
+  // Filter biomarker groups based on search
+  const filteredGroups = biomarkerGroups ? Object.entries(biomarkerGroups)
+    .filter(([groupName, biomarkers]) => 
       groupName.toLowerCase().includes(search.toLowerCase()) ||
-      options.some(option => 
-        option.name.toLowerCase().includes(search.toLowerCase())
+      biomarkers.some(biomarker => 
+        biomarker.name.toLowerCase().includes(search.toLowerCase())
       )
     )
-    .map(([groupName, options]) => ({
+    .map(([groupName, biomarkers]) => ({
       groupName,
-      options: options.filter(option => 
-        option.name.toLowerCase().includes(search.toLowerCase())
+      biomarkers: biomarkers.filter(biomarker => 
+        biomarker.name.toLowerCase().includes(search.toLowerCase())
       )
-    }));
+    })) : [];
 
   const selectedNames = selected.map(uuid => {
-    const found = allOptions.find(opt => opt.uuid === uuid);
-    return found ? found.name : uuid;
+    // Find the biomarker across all groups
+    for (const [groupName, biomarkers] of Object.entries(biomarkerGroups || {})) {
+      const found = biomarkers.find(bm => bm.uuid === uuid);
+      if (found) return found.name;
+    }
+    return uuid;
   });
 
   // Fallback UI if no groups
-  if (!biomarkerGroupsDisplay || Object.keys(biomarkerGroupsDisplay).length === 0) {
+  if (!biomarkerGroups || Object.keys(biomarkerGroups).length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 font-opensans">
         <div className="max-w-2xl w-full animate-fade-in content-wrapper">
@@ -153,13 +130,13 @@ const BiomarkerSelector = () => {
                       {group.groupName}
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {group.options.map(option => {
-                        const isSelected = selected.includes(option.uuid);
-                        const isBlood = option.type === 'BLOOD';
-                        const isNonBlood = option.type === 'NON_BLOOD';
+                      {group.biomarkers.map(biomarker => {
+                        const isSelected = selected.includes(biomarker.uuid);
+                        const isBlood = biomarker.type === 'BLOOD';
+                        const isNonBlood = biomarker.type === 'NON_BLOOD';
                         return (
                           <div
-                            key={option.uuid}
+                            key={biomarker.uuid}
                             className={`glass-effect rounded-2xl p-4 cursor-pointer transition-all duration-300 ${
                               isSelected 
                                 ? 'border-2 border-green-500 bg-green-100/30' 
@@ -167,7 +144,7 @@ const BiomarkerSelector = () => {
                             } ${
                               isBlood ? 'bg-red-100/20' : isNonBlood ? 'bg-blue-100/20' : 'bg-white/20'
                             }`}
-                            onClick={() => toggle(option.uuid)}
+                            onClick={() => toggle(biomarker.uuid)}
                             onMouseEnter={e => {
                               e.currentTarget.style.transform = 'translateY(-2px)';
                               e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
@@ -182,20 +159,20 @@ const BiomarkerSelector = () => {
                                 <div className={`font-roboto font-semibold text-sm mb-1 truncate ${
                                   isBlood ? 'text-red-700' : isNonBlood ? 'text-blue-700' : 'text-gray-800'
                                 }`}>
-                                  {option.name}
+                                  {biomarker.name}
                                 </div>
                                 <div className={`text-xs px-2 py-1 rounded-full inline-block ${
                                   isBlood 
                                     ? 'bg-red-200/50 text-red-700' 
                                     : 'bg-blue-200/50 text-blue-700'
                                 }`}>
-                                  {option.type}
+                                  {biomarker.type}
                                 </div>
                               </div>
                               <button
                                 onClick={e => {
                                   e.stopPropagation();
-                                  setInfoBiomarker(option);
+                                  setInfoBiomarker(biomarker);
                                 }}
                                 className="ml-2 p-1 rounded-full hover:bg-white/30 transition-all duration-200 text-gray-600 hover:text-gray-800"
                                 title="Show details"
@@ -274,9 +251,13 @@ const BiomarkerSelector = () => {
                         <span className="font-opensans font-medium text-green-800">{name}</span>
                         <button
                           onClick={() => {
-                            const biomarker = allOptions.find(opt => opt.name === name);
-                            if (biomarker) {
-                              toggle(biomarker.uuid);
+                            // Find the biomarker across all groups
+                            for (const [groupName, biomarkers] of Object.entries(biomarkerGroups || {})) {
+                              const biomarker = biomarkers.find(bm => bm.name === name);
+                              if (biomarker) {
+                                toggle(biomarker.uuid);
+                                break;
+                              }
                             }
                           }}
                           className="p-1 rounded-full hover:bg-green-200/50 transition-all duration-200 text-green-700"
