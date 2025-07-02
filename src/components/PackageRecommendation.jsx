@@ -151,6 +151,49 @@ const PackageRecommendation = () => {
                 </div>
               </div>
 
+              {/* Requirements Info */}
+              <div className="flex flex-wrap gap-3 mb-6">
+                {/* Debug info */}
+                <div className="text-xs text-red-500 mb-2 w-full">
+                  Debug: isFastingRequired = {String(packages?.individualPackages?.isFastingRequired)}, isSampleRequired = {String(packages?.individualPackages?.isSampleRequired)}
+                </div>
+                
+                <div className={`px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 ${
+                  packages?.individualPackages?.isFastingRequired === true
+                    ? 'bg-orange-100/50 text-orange-800 border border-orange-200/50' 
+                    : packages?.individualPackages?.isFastingRequired === false
+                    ? 'bg-green-100/50 text-green-800 border border-green-200/50'
+                    : 'bg-gray-100/50 text-gray-600 border border-gray-200/50'
+                }`}>
+                  <span>
+                    {packages?.individualPackages?.isFastingRequired === true ? '🕐' : 
+                     packages?.individualPackages?.isFastingRequired === false ? '✅' : '❓'}
+                  </span>
+                  <span>Fasting: {
+                    packages?.individualPackages?.isFastingRequired === true ? 'Required' : 
+                    packages?.individualPackages?.isFastingRequired === false ? 'Not Required' : 
+                    'Data not available'
+                  }</span>
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 ${
+                  packages?.individualPackages?.isSampleRequired === true
+                    ? 'bg-blue-100/50 text-blue-800 border border-blue-200/50' 
+                    : packages?.individualPackages?.isSampleRequired === false
+                    ? 'bg-gray-100/50 text-gray-800 border border-gray-200/50'
+                    : 'bg-gray-100/50 text-gray-600 border border-gray-200/50'
+                }`}>
+                  <span>
+                    {packages?.individualPackages?.isSampleRequired === true ? '🧪' : 
+                     packages?.individualPackages?.isSampleRequired === false ? '❌' : '❓'}
+                  </span>
+                  <span>Sample: {
+                    packages?.individualPackages?.isSampleRequired === true ? 'Required' : 
+                    packages?.individualPackages?.isSampleRequired === false ? 'Not Required' : 
+                    'Data not available'
+                  }</span>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {packages?.individualPackages?.packageEntities?.map(renderPackageCard)}
               </div>
@@ -166,6 +209,44 @@ const PackageRecommendation = () => {
                 </h2>
                 <div className="text-xl font-roboto font-bold text-gray-800">
                   Total: {formatPrice(packages?.comboPackage?.totalPrice || 0)}
+                </div>
+              </div>
+
+              {/* Requirements Info */}
+              <div className="flex flex-wrap gap-3 mb-6">
+                <div className={`px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 ${
+                  packages?.comboPackage?.isFastingRequired === true
+                    ? 'bg-orange-100/50 text-orange-800 border border-orange-200/50' 
+                    : packages?.comboPackage?.isFastingRequired === false
+                    ? 'bg-green-100/50 text-green-800 border border-green-200/50'
+                    : 'bg-gray-100/50 text-gray-600 border border-gray-200/50'
+                }`}>
+                  <span>
+                    {packages?.comboPackage?.isFastingRequired === true ? '🕐' : 
+                     packages?.comboPackage?.isFastingRequired === false ? '✅' : '❓'}
+                  </span>
+                  <span>Fasting: {
+                    packages?.comboPackage?.isFastingRequired === true ? 'Required' : 
+                    packages?.comboPackage?.isFastingRequired === false ? 'Not Required' : 
+                    'Data not available'
+                  }</span>
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 ${
+                  packages?.comboPackage?.isSampleRequired === true
+                    ? 'bg-blue-100/50 text-blue-800 border border-blue-200/50' 
+                    : packages?.comboPackage?.isSampleRequired === false
+                    ? 'bg-gray-100/50 text-gray-800 border border-gray-200/50'
+                    : 'bg-gray-100/50 text-gray-600 border border-gray-200/50'
+                }`}>
+                  <span>
+                    {packages?.comboPackage?.isSampleRequired === true ? '🧪' : 
+                     packages?.comboPackage?.isSampleRequired === false ? '❌' : '❓'}
+                  </span>
+                  <span>Sample: {
+                    packages?.comboPackage?.isSampleRequired === true ? 'Required' : 
+                    packages?.comboPackage?.isSampleRequired === false ? 'Not Required' : 
+                    'Data not available'
+                  }</span>
                 </div>
               </div>
 
