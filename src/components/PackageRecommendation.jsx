@@ -284,7 +284,7 @@ const PackageRecommendation = () => {
       {/* Package Details Modal */}
       {showDetails && (
         <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="glass-effect rounded-3xl p-8 max-w-2xl w-full max-h-96 overflow-y-auto">
+          <div className="glass-effect rounded-3xl p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-start mb-6">
               <h2 className="text-2xl font-roboto font-bold text-gray-800 text-shadow">Package Details</h2>
               <button
@@ -296,16 +296,117 @@ const PackageRecommendation = () => {
             </div>
             
             <div className="space-y-6">
+              {/* Package Name */}
               <div className="p-4 bg-white/20 backdrop-blur-sm rounded-xl">
                 <h3 className="font-roboto font-semibold text-gray-800 mb-2">Package Name</h3>
                 <p className="font-opensans text-gray-700">{showDetails.name || (showDetails.type === 'Blood_Package' ? 'Blood Package' : 'Mini Package')}</p>
               </div>
 
+              {/* UUID */}
+              <div className="p-4 bg-white/20 backdrop-blur-sm rounded-xl">
+                <h3 className="font-roboto font-semibold text-gray-800 mb-2">Package UUID</h3>
+                <p className="font-mono text-sm break-all text-gray-700">{showDetails.uuid}</p>
+              </div>
+
+              {/* Type */}
+              <div className="p-4 bg-white/20 backdrop-blur-sm rounded-xl">
+                <h3 className="font-roboto font-semibold text-gray-800 mb-2">Package Type</h3>
+                <p className="font-opensans text-gray-700">{showDetails.type}</p>
+              </div>
+
+              {/* Price */}
               <div className="p-4 bg-white/20 backdrop-blur-sm rounded-xl">
                 <h3 className="font-roboto font-semibold text-gray-800 mb-2">Price</h3>
                 <p className="text-xl font-roboto font-bold text-gray-800">{formatPrice(showDetails.price)}</p>
               </div>
 
+              {/* Fasting Requirements */}
+              <div className="p-4 bg-white/20 backdrop-blur-sm rounded-xl">
+                <h3 className="font-roboto font-semibold text-gray-800 mb-2">Fasting Requirements</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      showDetails.isFastingRequired 
+                        ? 'bg-green-100/50 text-green-800 border border-green-200/50' 
+                        : 'bg-red-100/50 text-red-800 border border-red-200/50'
+                    }`}>
+                      {showDetails.isFastingRequired ? 'Required' : 'Not Required'}
+                    </span>
+                  </div>
+                  {showDetails.isFastingRequired && showDetails.fastingHours && (
+                    <p className="text-sm text-gray-600">Fasting Duration: {showDetails.fastingHours} hours</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Sample Requirements */}
+              <div className="p-4 bg-white/20 backdrop-blur-sm rounded-xl">
+                <h3 className="font-roboto font-semibold text-gray-800 mb-2">Sample Requirements</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      showDetails.isSampleRequired 
+                        ? 'bg-green-100/50 text-green-800 border border-green-200/50' 
+                        : 'bg-red-100/50 text-red-800 border border-red-200/50'
+                    }`}>
+                      {showDetails.isSampleRequired ? 'Required' : 'Not Required'}
+                    </span>
+                  </div>
+                  {showDetails.sampleDetails && showDetails.sampleDetails.length > 0 && (
+                    <div className="mt-3">
+                      <h4 className="font-roboto font-medium text-gray-700 mb-2">Sample Details:</h4>
+                      <div className="space-y-1">
+                        {showDetails.sampleDetails.map((detail, index) => (
+                          <div key={index} className="p-2 bg-white/10 rounded-lg text-sm font-opensans text-gray-700">
+                            {detail}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* TAT Data */}
+              {showDetails.tatData && (
+                <div className="p-4 bg-white/20 backdrop-blur-sm rounded-xl">
+                  <h3 className="font-roboto font-semibold text-gray-800 mb-2">Turnaround Time (TAT)</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-600">City ID</p>
+                      <p className="font-opensans text-gray-700">{showDetails.tatData.cityId}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Blood TAT</p>
+                      <p className="font-opensans text-gray-700">{showDetails.tatData.bloodTat}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Minimum TAT</p>
+                      <p className="font-opensans text-gray-700">{showDetails.tatData.minTat} days</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Maximum TAT</p>
+                      <p className="font-opensans text-gray-700">{showDetails.tatData.maxTat} days</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Biomarker UUIDs */}
+              {showDetails.biomarkerUuids && showDetails.biomarkerUuids.length > 0 && (
+                <div className="p-4 bg-white/20 backdrop-blur-sm rounded-xl">
+                  <h3 className="font-roboto font-semibold text-gray-800 mb-2">Biomarker UUIDs</h3>
+                  <div className="space-y-2">
+                    {showDetails.biomarkerUuids.map((uuid, index) => (
+                      <div key={index} className="p-2 bg-white/10 rounded-lg">
+                        <p className="font-mono text-sm break-all text-gray-700">{uuid}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Included Biomarkers */}
               <div className="p-4 bg-white/20 backdrop-blur-sm rounded-xl">
                 <h3 className="font-roboto font-semibold text-gray-800 mb-3">Included Biomarkers</h3>
                 <div className="max-h-48 overflow-y-auto space-y-2">
