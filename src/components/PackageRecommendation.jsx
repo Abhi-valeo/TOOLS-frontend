@@ -188,6 +188,10 @@ const PackageRecommendation = () => {
                     'Data not available'
                   }</span>
                 </div>
+                <div className="px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 bg-blue-100/50 text-blue-800 border border-blue-200/50">
+                  <span>⏱️</span>
+                  <span>Max TAT: {packages?.individualMaxTat || 'N/A'} days</span>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -243,6 +247,14 @@ const PackageRecommendation = () => {
                     packages?.comboPackage?.isSampleRequired === false ? 'Not Required' : 
                     'Data not available'
                   }</span>
+                </div>
+                <div className="px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 bg-purple-100/50 text-purple-800 border border-purple-200/50">
+                  <span>📦</span>
+                  <span>Mini Package Max TAT: {packages?.comboMiniPackageMaxTat || 'N/A'} days</span>
+                </div>
+                <div className="px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 bg-orange-100/50 text-orange-800 border border-orange-200/50">
+                  <span>🩸</span>
+                  <span>Blood Package Max TAT: {packages?.comboBloodPackageMaxTat === 'null' ? 'N/A' : packages?.comboBloodPackageMaxTat || 'N/A'} days</span>
                 </div>
               </div>
 
